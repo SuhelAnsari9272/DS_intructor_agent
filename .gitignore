@@ -1,0 +1,6 @@
+/__pycache__/
+/.vscode
+/.env
+project_architecture.txt
+project_structure.txt
+/notebooks
