@@ -9,6 +9,8 @@ from langchain_core.messages import HumanMessage, SystemMessage
 from prompt import router_prompt, python_instructor_prompt, sql_instructor_prompt, \
                     excel_instructor_prompt, ml_instructor_prompt
 
+from utils import save_graph
+
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -90,6 +92,7 @@ graph.add_edge("excel", END)
 graph.add_edge("ml", END)
 
 instructor = graph.compile()
+# save_graph(instructor)
 
-answer = instructor.invoke({"query":  "How does Random Forest work?"})
+answer = instructor.invoke({"query":  "Tell me about OOPs"})
 print(answer["response"].content)
