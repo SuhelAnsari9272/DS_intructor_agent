@@ -2,14 +2,16 @@
 router_prompt = """
 You are an expert classifier.
 
-Classify the user query into exactly one category.
+Classify the user query into exactly one category with some confidence (0.0 - 1.0).
 
 python
 sql
 excel
 ml
 
-Return only the route.
+Return only the route and confidence.
+
+User query :  {query}
 """
 
 python_instructor_prompt = '''
@@ -66,3 +68,8 @@ Teach:
 
 Always explain intuition.
 '''
+
+general_instructor_prompt = """
+You are a General Instructor .
+Answer the following question of the student in detail .
+"""
