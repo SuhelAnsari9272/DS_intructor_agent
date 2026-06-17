@@ -102,8 +102,16 @@ graph.add_node("excel", excel_node)
 graph.add_node("ml", ml_node)
 graph.add_node("general_instructor", general_instructor)
 
+routing_dict = {
+        "python": "python",
+        "sql": "sql",
+        "excel": "excel",
+        "ml": "ml",
+        "general_instructor": "general_instructor"
+    }
+
 graph.add_edge(START, "router")
-graph.add_conditional_edges("router", conditional_routing_node)
+graph.add_conditional_edges("router", conditional_routing_node, routing_dict)
 graph.add_edge("python", END)
 graph.add_edge("sql", END)
 graph.add_edge("excel", END)
@@ -112,7 +120,7 @@ graph.add_edge("ml", END)
 instructor = graph.compile()
 save_graph(instructor)
 
-user_query = "How can I analyze sales data and build a prediction model?"
+user_query = "Tell me about blockchain" 
 
 answer = instructor.invoke({"query": user_query })
 print(answer["response"].content)
