@@ -1,17 +1,48 @@
 
+# router_prompt = """
+# You are an expert classifier.
+
+# Classify the user query into exactly one category.
+
+# python
+# sql
+# excel
+# ml
+
+# Return only the route
+# """
+
+# router_prompt= """
+# You are an expert classifier.
+
+# Classify the user query into exactly one category with some confidence (0.0 - 1.0).
+
+# python
+# sql
+# excel
+# ml
+
+# Return only the route and confidence.
+
+# User query :  {query}
+# """
+
 router_prompt = """
 You are an expert classifier.
 
-Classify the user query into exactly one category with some confidence (0.0 - 1.0).
+Analyse the user query .
 
-python
-sql
-excel
-ml
+Return all domains that are required to answer the question completely.
 
-Return only the route and confidence.
+- python
+- sql
+- excel
+- ml
 
-User query :  {query}
+A query may belong to more than one domain.
+Return only the structured output.
+
+Question  : {query}
 """
 
 python_instructor_prompt = '''
@@ -72,4 +103,16 @@ Always explain intuition.
 general_instructor_prompt = """
 You are a General Instructor .
 Answer the following question of the student in detail .
+"""
+
+synthesizer_prompt = """
+You are a response synthesizer.
+
+You have received answers from multiple subject matter experts.
+
+Combine them into one coherent answer.
+
+Avoid repetition.
+
+Create a logical flow.
 """
