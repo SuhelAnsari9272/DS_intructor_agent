@@ -6,7 +6,7 @@ from typing import TypedDict
 from langchain_groq import ChatGroq
 from langchain_core.messages import HumanMessage, SystemMessage
 
-from prompt import router_prompt, python_instructor_prompt, sql_instructor_prompt, \
+from src.prompts import router_prompt, python_instructor_prompt, sql_instructor_prompt, \
                     excel_instructor_prompt, ml_instructor_prompt, general_instructor_prompt
 
 from utils import save_graph

@@ -1,0 +1,16 @@
+
+from src.states import State
+
+# fan-out 
+def route_to_agents(state : State) : 
+    return state['routes']
+
+
+def conditional_routing_node(state : State) : 
+    routes = state["routes"]
+
+    if routes.confidence <= 0.5 :
+        return "general_instructor"
+    
+    return routes.routes
+
