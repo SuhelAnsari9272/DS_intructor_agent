@@ -25,7 +25,7 @@ class State(TypedDict):
     response: str
 
 llm = ChatGroq(model = "llama-3.1-8b-instant", #"llama-3.3-70b-versatile", 
-               temperature=0.7, 
+               temperature=0, 
                max_tokens= 100
                )
 
@@ -88,7 +88,7 @@ def general_instructor(state :State) :
 
 def conditional_routing_node(state : State) : 
     route = state["route"]
-    if route.confidence < 0.5 :
+    if route.confidence <= 0.5 :
         return "general_instructor"
     
     return route.route

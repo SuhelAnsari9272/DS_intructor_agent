@@ -39,7 +39,8 @@ Return all domains that are required to answer the question completely.
 - excel
 - ml
 
-A query may belong to more than one domain.
+Also, provide a confidence for the selected domains based on the relevance with Question. (0.0 - 1.0)
+
 Return only the structured output.
 
 Question  : {query}
@@ -102,7 +103,7 @@ Always explain intuition.
 
 general_instructor_prompt = """
 You are a General Instructor .
-Answer the following question of the student in detail .
+Answer the following question in detail.
 """
 
 synthesizer_prompt = """
