@@ -1,7 +1,8 @@
 
 from langgraph.graph import StateGraph, START, END
 from src.states import State
-from src.nodes import router_node, python_node, sql_node, excel_node, ml_node, general_instructor, synthesizer_node
+from src.nodes import router_node, python_node, sql_node, excel_node, ml_node, \
+                router_node_with_embedding, general_instructor, synthesizer_node
 from src.edges import conditional_routing_node
 
 ROUTES = {
@@ -15,7 +16,7 @@ ROUTES = {
 def create_workflow_graph()  :
 
     graph = StateGraph(State)
-    graph.add_node("router", router_node)
+    graph.add_node("router", router_node_with_embedding)
     graph.add_node("general_instructor", general_instructor)
     graph.add_node("python", python_node)
     graph.add_node("sql", sql_node)
@@ -35,4 +36,3 @@ def create_workflow_graph()  :
     graph.add_edge("synthesizer", END)
 
     return graph
-

@@ -1,6 +1,6 @@
 
 from src.graph import create_workflow_graph
-from utils import save_graph
+from utils.utils import save_graph
 
 
 
