@@ -9,7 +9,10 @@ def route_to_agents(state : State) :
 def conditional_routing_node(state : State) : 
     routes = state["routes"]
 
-    if routes.confidence <= 0.5 :
+    # if routes.confidence <= 0.5 :
+    #     return "general_instructor"
+
+    if len(routes.routes) == 0 :
         return "general_instructor"
     
     return routes.routes
