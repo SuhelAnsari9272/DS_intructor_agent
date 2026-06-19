@@ -91,6 +91,14 @@ def synthesizer_node(state: State):
 
     agent_outputs = state["agent_outputs"]
 
+    if len(agent_outputs) <= 1 :
+        if not agent_outputs :
+            return {"final_response"  : "Not able to get any answer !! Sorry."}
+        
+        agent_output = agent_outputs[0]
+        
+        return {"final_response" : agent_output["answer"]}
+
     response = llm.invoke([
             SystemMessage(content=synthesizer_prompt),
             HumanMessage(content=f"""

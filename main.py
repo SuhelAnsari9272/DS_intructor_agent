@@ -14,8 +14,8 @@ user_question  = "What is a decorator in Python ?"
 # user_question  = "Tell me about MS Dhoni"
 
 answer = instructor.invoke({"query": user_question})
-# print(answer)
-# print(answer['final_response'])
+print(answer)
+print(answer['final_response'])
 
 print('-----------------------------------------------------------------------------')
 
