@@ -25,11 +25,13 @@ def router_node_with_embedding(state : State) :
         result = RouterOutput(routes=selected_domains,  confidence=confidence )
 
         return {"routes" : result}
-
-    prompt = router_prompt.format(query=state["query"])
-    result= llm.with_structured_output(RouterOutput).invoke(prompt)
     
-    return {"routes" : result}
+    else :
+        
+        prompt = router_prompt.format(query=state["query"])
+        result= llm.with_structured_output(RouterOutput).invoke(prompt)
+        
+        return {"routes" : result}
 
 def python_node(state : State) : 
     response = llm.invoke([

@@ -1,23 +1,31 @@
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
+import numpy as np
+
+global domain_embeddings
+
+domain_embeddings = None
 
 python_desc = """
-Python programming language, functions, classes,
+Python, functions, classes,
     decorators, generators, list comprehensions,
-    pandas, numpy, flask, fastapi, django,
-    object oriented programming, python debugging
+    pandas, numpy, flask, fastapi,
+    object oriented programming, python debugging, args, kwargs,
+    try, except, finally
 """
 
 sql_desc = """
 SQL queries, joins, group by, order by,
     database design, indexing, normalization,
-    mysql, postgresql, database optimization
+    mysql, postgresql, database optimization, where , having, UNION, UNION ALL, 
+    CASE, WHEN, CTE, common table expression, 
 """
 
 excel_desc = """
 Excel formulas, pivot tables, vlookup,
     xlookup, charts, dashboards,
-    conditional formatting, spreadsheets
+    conditional formatting, spreadsheets, sumif, formula, absolute cell reference, 
+    relative cell reference, dropdown list,
 """
 
 ml_desc = """
@@ -25,7 +33,9 @@ Machine learning, deep learning,
     regression, classification,
     random forest, xgboost,
     neural networks, feature engineering,
-    model evaluation, statistics
+    model evaluation, statistics, bias, variance, bais-variance tradeoff, overfitting,
+    precision, recall, precision - recall tradeoff, bagging, boosting, regularization,
+    k-means, clustering, cross-validation, PCA, principal component analysis
 """
 
 embedding_model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
@@ -51,20 +61,25 @@ def create_domain_embedding():
     except Exception as e : 
         print("Error in creating domain embeddings : ", e)
 
+if domain_embeddings is None: 
+    domain_embeddings, domain_names = create_domain_embedding()
 
-domain_embeddings, domain_names = create_domain_embedding()
 
-
-def get_selected_domain(user_query, threshold = 0.25) : 
+def get_selected_domain(user_query, threshold = 0.25) : # 0.20  0.25
     
     try :
         query_embedding = embedding_model.encode(user_query, normalize_embeddings=True )
 
         similarities = cosine_similarity( [query_embedding], domain_embeddings)[0]
 
-        for domain, score in zip(domain_names, similarities):
-            print(domain, round(float(score), 4))
+        # for domain, score in zip(domain_names, similarities):
+        #     print(domain, round(float(score), 4))
 
+
+        similarity_dict = { domain : np.round(score,2) for domain, score in zip(domain_names, similarities)}
+
+
+        # Later we can use top similarity 
         selected_domains = []
         cum_sum =  0.0
 
@@ -73,14 +88,10 @@ def get_selected_domain(user_query, threshold = 0.25) :
                 selected_domains.append(domain)
                 cum_sum = cum_sum + score
 
-
-        print(selected_domains)
-        print(cum_sum)
+        print(f"Query : {user_query} | Domain: {selected_domains} | Similarities : {similarity_dict}")
+        # print(cum_sum)
 
         return selected_domains, cum_sum
     
     except Exception as e: 
         print("Error in getting selected domain : ", e)
-
-
-
