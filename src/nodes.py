@@ -18,11 +18,11 @@ def router_node(state : State) :
 
 def router_node_with_embedding(state : State) :
 
-    selected_domains, confidence =  get_selected_domain(state["query"])
+    selected_domains, entropy_norm =  get_selected_domain(state["query"])
 
-    if selected_domains :
+    if entropy_norm <= 0.75 :
 
-        result = RouterOutput(routes=selected_domains,  confidence=confidence )
+        result = RouterOutput(routes=selected_domains,  confidence= 1.00 - entropy_norm)
 
         return {"routes" : result}
     
