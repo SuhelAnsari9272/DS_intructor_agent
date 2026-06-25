@@ -7,8 +7,13 @@ from langchain_groq import ChatGroq
 from langchain_core.messages import HumanMessage, SystemMessage, AIMessage
 from operator import add
 
-from src.prompts import router_prompt, python_instructor_prompt, sql_instructor_prompt, general_instructor_prompt, \
-                    excel_instructor_prompt, ml_instructor_prompt, synthesizer_prompt
+from prompts.router_prompt import router_prompt
+from prompts.excel_prompt  import excel_instructor_prompt
+from prompts.ml_prompt import ml_instructor_prompt
+from prompts.sql_prompt import sql_instructor_prompt
+from prompts.synthesize_prompt import synthesizer_prompt
+from prompts.python_prompt import python_instructor_prompt
+from prompts.general_prompt import general_instructor_prompt
 
 from utils import save_graph
 
