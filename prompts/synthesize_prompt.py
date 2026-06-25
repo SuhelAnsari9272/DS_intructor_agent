@@ -49,7 +49,8 @@ Your task:
 Generate the following structured output:
 
 answer:
-- The complete educational answer.
+- The complete educational answer. 
+- Keep it short and precise. 
 
 topics_covered:
 - Only concepts directly explained in the answer.
